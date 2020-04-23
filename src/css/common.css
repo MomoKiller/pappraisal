@@ -67,6 +67,44 @@ a:hover {
     clear: both;
 }
 
+/* iphone 6+ */
+
+@media screen and (max-width: 414px) and (min-width: 376px) {
+    html,
+    body {
+        font-size: 10px !important;
+    }
+}
+
+
+/* iphoneX 6 */
+
+@media screen and (max-width: 375px) and (min-width: 361px) {
+    html,
+    body {
+        font-size: 10px !important;
+    }
+}
+
+
+/* S5 */
+
+@media screen and (max-width: 360px) and (min-width: 321px) {
+    html,
+    body {
+        font-size: 9px !important;
+    }
+}
+
+
+/* iphone 5 */
+
+@media screen and (max-width: 320px) {
+    html,
+    body {
+        font-size: 8px !important;
+    }
+}
 
 /**** iphoneX 兼容性样式 -start-****/
 
