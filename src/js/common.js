@@ -1,6 +1,6 @@
 var common = {
     templateHtml: {
-        roules: '<div class="confirm roules">' +
+        roules: '<div class="popup roules">' +
             '<div class="mask"></div>' +
             '<div class="content-wrap">' +
             '<div class="bg">' +
