@@ -42,19 +42,19 @@ var activity = {
 
                 switch (item) {
                     case 1:
-                        common.openFrame('gift', obj, function() { alert('1'); });
+                        common.openFrame('gift', obj, function(item) { console.log('这个是你提交的对象', item) });
                         break;
                     case 2:
                         common.openFrame('sorry');
                         break;
                     case 3:
-                        common.openFrame('gift', obj, function() { alert('1'); });
+                        common.openFrame('gift', obj, function(item) { console.log('这个是你提交的对象', item) });
                         break;
                     case 4:
                         common.openFrame('sorry');
                         break;
                     case 5:
-                        common.openFrame('gift', obj, function() { alert('1'); });
+                        common.openFrame('gift', obj, function(item) { console.log('这个是你提交的对象', item) });
                         break;
                     case 6:
                         common.openFrame('sorry');

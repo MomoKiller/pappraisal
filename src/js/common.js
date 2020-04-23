@@ -105,7 +105,12 @@ var common = {
         // 有回调的提交方法
         if (_domCommitBtn && _domCommitBtn.length > 0) {
             _domCommitBtn.bind('click', function() {
-                callback();
+                var data = {
+                    name: $('.gift .info-gift ul li:nth-child(1) input').val(),
+                    phone: $('.gift .info-gift ul li:nth-child(2) input').val(),
+                    address: $('.gift .info-gift ul li:nth-child(3) input').val()
+                }
+                callback(data);
                 _this.closeFrame();
             });
         }
