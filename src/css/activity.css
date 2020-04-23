@@ -59,6 +59,8 @@ header .head .label-wrap a {
     background-size: 100%;
     background-position: center;
     margin: 0 auto;
+    animation: labelToBig 0.5s linear infinite alternate;
+    -webkit-animation: labelToBig 0.5s linear infinite alternate;
 }
 
 header .head .banner {
@@ -105,6 +107,8 @@ header .head .banner .turnplate a.btn-label {
     background: url(../img/activity-label-click.png) no-repeat;
     background-size: 100%;
     background-position: center;
+    animation: btnToBig 0.5s linear infinite alternate;
+    -webkit-animation: btnToBig 0.5s linear infinite alternate;
 } 
 
 header .head .banner .turnplate a.pointer {
@@ -357,4 +361,64 @@ footer ul li::after {
 
 footer ul li:last-child::after {
     background: none;
+}
+
+/* 动画效果 */
+/* 顶部文字 */
+@keyframes labelToBig{
+    from{
+        width: 47.1%;
+        height: 0;
+        padding-bottom: 12.5%;
+    }
+    to {
+        width: 52.34%;
+        height: 0;
+        padding-bottom: 12.5%;
+    }
+}
+
+@-webkit-keyframes labelToBig{
+    from{
+        width: 47.1%;
+        height: 0;
+        padding-bottom: 12.5%;
+    }
+    to {
+        width: 52.34%;
+        height: 0;
+        padding-bottom: 12.5%;
+    }
+}
+
+/* 按钮文字 */
+@keyframes btnToBig {
+    from {
+        width: 11.43%;
+        height: 12.15%;
+        position: absolute;
+        left: 44.28%;
+        top: 44%;
+    }
+    to {
+        width: 12.7%;
+        height: 13.5%;
+        left: 43.65%;
+        top: 44%;
+    }
+}
+@-webkit-keyframes btnToBig{
+    from {
+        width: 11.43%;
+        height: 12.15%;
+        position: absolute;
+        left: 44.28%;
+        top: 44%;
+    }
+    to {
+        width: 12.7%;
+        height: 13.5%;
+        left: 43.65%;
+        top: 44%;
+    }
 }
