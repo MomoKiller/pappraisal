@@ -81,6 +81,15 @@ var activity = {
             //奖品数量等于10,指针落在对应奖品区域的中心角度[252, 216, 180, 144, 108, 72, 36, 360, 324, 288]
             _this.rotateFn(item, _this.turnplate.restaraunts[item - 1]);
         });
+
+        $('.award-info .top .right a').bind('click', function() {
+            var obj = {
+                name: '空气净化器',
+                num: 1,
+                unit: '台'
+            }
+            common.openFrame('gift', obj, function(item) { console.log('这个是你提交的对象', item) });
+        });
     }
 }
 
