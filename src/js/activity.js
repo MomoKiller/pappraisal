@@ -7,6 +7,9 @@ var activity = {
         var _this = activity;
         _this.turnplate.restaraunts = ['一等奖空气净化器', '很抱歉未中奖', '二等奖车乐福洗车券', '差点就中了', '三等奖5元话费', '谢谢参与'];
         _this.bindEvent();
+
+        // 加载规则
+        common.openFrame('roules');
     },
     rotateFn: function(item, txt) {
         var _this = activity;
@@ -22,8 +25,43 @@ var activity = {
             animateTo: angles + 1800,
             duration: 8000,
             callback: function() {
-                alert(txt);
                 _this.turnplate.bRotate = !_this.turnplate.bRotate;
+
+
+                /**  根据 item 值弹不同框
+                 *   弹框事件已经在common.js 中封装。 参数在注释里面
+                 *   调用方式： common.openFrame('gift', obj, callback);    
+                 *   callback 是点击提交的回调函数； 直接写里面或者另外定义  
+                 *   
+                 */
+                var obj = {
+                    name: '空气净化器',
+                    num: 1,
+                    unit: '台'
+                }
+
+                switch (item) {
+                    case 1:
+                        common.openFrame('gift', obj, function() { alert('1'); });
+                        break;
+                    case 2:
+                        common.openFrame('sorry');
+                        break;
+                    case 3:
+                        common.openFrame('gift', obj, function() { alert('1'); });
+                        break;
+                    case 4:
+                        common.openFrame('sorry');
+                        break;
+                    case 5:
+                        common.openFrame('gift', obj, function() { alert('1'); });
+                        break;
+                    case 6:
+                        common.openFrame('sorry');
+                        break;
+                    default:
+                        break;
+                }
             }
         });
     },

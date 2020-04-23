@@ -22,7 +22,7 @@ var common = {
             '<div class="bg">' +
             '<div class="info-gift">' +
             '<p class="c-title">中奖啦</p>' +
-            '<p class="c-name">获得<a>空气净化器1台</a></p>' +
+            '<p class="c-name">获得<a>{name}{num}{unit}</a></p>' +
             '<a class="split">请准确填写以下收件信息</a>' +
             '<ul>' +
             '<li>' +
@@ -47,7 +47,7 @@ var common = {
             '<a class="btn-close"></a>' +
             '</div>' +
             '</div>' +
-            '</div>',    
+            '</div>',
         congratulate: '<div class="confirm congratulate">' +
             '<div class="mask"></div>' +
             '<div class="content-wrap">' +
@@ -79,41 +79,117 @@ var common = {
     },
     init: function() {
         var _this = common;
+        // 
+        _this.bindFooterEvent();
     },
-    // 事件绑定
-    bindEvent: function(){
-        // 弹框 DOM 元素 selector
-        var _domPopup = $('.popup');
-        var _domConfirm = $('.confirm');
-        var _domClose = $('.popup .btn-wrap .btn-close');
+    // 弹框事件绑定  *注--弹框加载后进行事件绑定 
+    bindEvent: function(callback) {
+        var _this = common;
+
+        var _domCommitBtn = $('.popup .btn-wrap .btn-commit');
         var _domConfirmBtn = $('.confirm .btn-wrap .btn-confirm');
+        var _domClose = $('.popup .btn-wrap .btn-close');
 
         // 关闭事件
-
+        if (_domClose && _domClose.length > 0) {
+            _domClose.bind('click', function() {
+                _this.closeFrame();
+            });
+        }
+        // 确认
+        if (_domConfirmBtn && _domConfirmBtn.length > 0) {
+            _domConfirmBtn.bind('click', function() {
+                _this.closeFrame();
+            });
+        }
+        // 有回调的提交方法
+        if (_domCommitBtn && _domCommitBtn.length > 0) {
+            _domCommitBtn.bind('click', function() {
+                callback();
+                _this.closeFrame();
+            });
+        }
     },
-    // 打开弹框
-    openConfirm(){
+    /** 打开弹框
+     * 
+     * @param {*} name：    roules | gift | congratulate | sorry | share
+     * @param {*} obj       中奖弹框打开时展示的信息对象. name='gift' 时必传
+     * @param {*} callback  中奖弹框点击提交的回调函数 . name='gift' 时必传
+     */
+    openFrame: function(name, obj, callback) {
         var _domConfirm = $('.confirm');
-        if(_domConfirm){    
+        var _domPopup = $('.popup');
+        if (_domConfirm) {
             _domConfirm.remove();
         }
+        if (_domPopup && _domPopup.length > 0) {
+            _domPopup.remove();
+        }
+        var html = common.templateHtml[name];
 
-        var html = common.templateHtml.share;
+        if (name == 'gift') {
+            var trArr = {
+                name: obj.name,
+                num: obj.num,
+                unit: obj.unit
+            }
+            html = html.substitute(trArr)
+        }
+
         $('body').append(html);
-
-    },
-    openPopup(){
-
+        // 事件绑定
+        common.bindEvent(callback);
     },
     // 关闭弹框
-    closeConfirm(){
-
+    closeFrame: function() {
+        var _domConfirm = $('.confirm');
+        var _domPopup = $('.popup');
+        if (_domConfirm) {
+            _domConfirm.remove();
+        }
+        if (_domPopup && _domPopup.length > 0) {
+            _domPopup.remove();
+        }
+        var _domCommitBtn = $('.popup .btn-wrap .btn-commit');
+        var _domConfirmBtn = $('.confirm .btn-wrap .btn-confirm');
+        var _domClose = $('.popup .btn-wrap .btn-close');
+        // 解除绑定事件
+        if (_domCommitBtn && _domCommitBtn.length > 0) {
+            _domCommitBtn.unbind();
+        }
+        if (_domConfirmBtn && _domConfirmBtn.length > 0) {
+            _domConfirmBtn.unbind();
+        }
+        if (_domClose && _domClose.length > 0) {
+            _domClose.unbind();
+        }
     },
-    closePopup(){
-
+    // 绑定 footer 事件
+    bindFooterEvent: function() {
+        var _domLi = $('footer ul li');
+        _domLi.bind('click', function(e) {
+            console.log(e);
+            alert($(this).text());
+        });
     }
+};
 
-}
+// 原型链写入模板替换方法
+(function($) {
+    if (!$) return;
+    $.extend(String.prototype, {
+        substitute: function(data) {
+            if (data && typeof(data) == 'object') {
+                return this.replace(/\{([^{}]+)\}/g, function(match, key) {
+                    var value = data[key];
+                    return (value !== undefined) ? '' + value : '';
+                });
+            } else {
+                return this.toString();
+            }
+        },
+    });
+})(jQuery);
 
 $(function() {
     common.init();
